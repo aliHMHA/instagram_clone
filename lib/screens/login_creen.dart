@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:instagram_flutter/resources/auth_methods.dart';
@@ -67,7 +69,7 @@ class _LoginScreenState extends State<LoginScreen> {
       height: _media.height,
       padding: _media.width > wepscreensize
           ? EdgeInsets.symmetric(horizontal: _media.width / 3)
-          : const EdgeInsets.symmetric(horizontal: 32),
+          : EdgeInsets.only(top: MediaQuery.of(context).viewPadding.top),
       width: double.infinity,
       child: Column(
         children: [
@@ -125,14 +127,18 @@ class _LoginScreenState extends State<LoginScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Container(
-                padding: const EdgeInsets.symmetric(vertical: 8),
+                padding: Platform.isIOS
+                    ? const EdgeInsets.only(bottom: 18, top: 8)
+                    : const EdgeInsets.only(bottom: 8, top: 8),
                 child: const Text('Don\'t have an account'),
               ),
               const SizedBox(width: 3),
               GestureDetector(
                 onTap: changelog,
                 child: Container(
-                  padding: const EdgeInsets.symmetric(vertical: 8),
+                  padding: Platform.isIOS
+                      ? const EdgeInsets.only(bottom: 18, top: 8)
+                      : const EdgeInsets.only(bottom: 8, top: 8),
                   child: const Text(
                     'Sign up',
                     style: TextStyle(

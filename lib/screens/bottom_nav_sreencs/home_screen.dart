@@ -70,7 +70,7 @@ class HomeScreen extends StatelessWidget {
                                         builder: (ctx) =>
                                             const SharePreview()));
                               },
-                              iconSize: 30),
+                              iconSize: 20),
                           CircleAvatar(
                             backgroundColor: Colors.red,
                             radius: 9,

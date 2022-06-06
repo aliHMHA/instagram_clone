@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'dart:typed_data';
 
 import 'package:firebase_auth/firebase_auth.dart';
@@ -88,7 +89,7 @@ class _SignupScreenState extends State<SignupScreen> {
         body: Container(
       padding: _media.width > wepscreensize
           ? EdgeInsets.symmetric(horizontal: _media.width / 3)
-          : const EdgeInsets.symmetric(horizontal: 32),
+          : EdgeInsets.only(top: MediaQuery.of(context).viewPadding.top),
       width: double.infinity,
       child: Column(
         children: [
@@ -192,14 +193,18 @@ class _SignupScreenState extends State<SignupScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Container(
-                padding: const EdgeInsets.symmetric(vertical: 8),
+                padding: Platform.isIOS
+                    ? const EdgeInsets.only(bottom: 18, top: 8)
+                    : const EdgeInsets.only(bottom: 8, top: 8),
                 child: const Text('Don\'t have an account'),
               ),
               const SizedBox(width: 3),
               GestureDetector(
                 onTap: changelod,
                 child: Container(
-                  padding: const EdgeInsets.symmetric(vertical: 8),
+                  padding: Platform.isIOS
+                      ? const EdgeInsets.only(bottom: 18, top: 8)
+                      : const EdgeInsets.only(bottom: 8, top: 8),
                   child: const Text(
                     'Login',
                     style: TextStyle(

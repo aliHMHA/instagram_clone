@@ -121,15 +121,29 @@ class _SharePreviewState extends State<SharePreview> {
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: [
-                                      Container(
-                                        padding: const EdgeInsets.symmetric(
-                                            horizontal: 15),
-                                        child: Text(
-                                          sharelist[ind].sendername,
-                                          style: const TextStyle(
-                                              fontWeight: FontWeight.bold,
-                                              fontSize: 20),
-                                        ),
+                                      Row(
+                                        children: [
+                                          Container(
+                                            padding: const EdgeInsets.symmetric(
+                                                horizontal: 7.5),
+                                            child: Text(
+                                              sharelist[ind].sendername,
+                                              style: const TextStyle(
+                                                  color: Colors.amber,
+                                                  fontWeight: FontWeight.bold,
+                                                  fontSize: 22),
+                                            ),
+                                          ),
+                                          const SizedBox(),
+                                          Container(
+                                            padding: const EdgeInsets.symmetric(
+                                                horizontal: 7.5),
+                                            child: const Text(
+                                              'Shared this post with you',
+                                              style: TextStyle(fontSize: 15),
+                                            ),
+                                          ),
+                                        ],
                                       ),
                                       Container(
                                         padding: const EdgeInsets.symmetric(

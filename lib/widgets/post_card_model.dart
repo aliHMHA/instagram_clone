@@ -10,7 +10,6 @@ import 'package:instagram_flutter/resources/storage_metods.dart';
 import 'package:instagram_flutter/resources/utlis.dart';
 import 'package:instagram_flutter/screens/bottom_nav_sreencs/profile_screen.dart';
 import 'package:instagram_flutter/screens/comments_scren.dart';
-import 'package:instagram_flutter/screens/responsev_layout_screen.dart';
 import 'package:instagram_flutter/screens/share_screen.dart';
 import 'package:instagram_flutter/units/colors.dart';
 import 'package:instagram_flutter/units/dimentions.dart';
@@ -152,12 +151,6 @@ class _PostCardModelState extends State<PostCardModel> {
                                                         .currentUser!.uid) {
                                                   Navigator.pop(ctx);
 
-                                                  // Navigator.of(context)
-                                                  //     .pushReplacement(
-                                                  //         MaterialPageRoute(
-                                                  //             builder: (cg) =>
-                                                  //                 const ResponsevLayoutScreen()));
-
                                                   await StorageMethods()
                                                       .deletepost(
                                                           commentlist: widget
@@ -211,15 +204,15 @@ class _PostCardModelState extends State<PostCardModel> {
                                     PreviewImage(image: widget.post.photoUrl)));
                       },
                       onDoubleTap: () async {
+                        setState(() {
+                          isAnimating = true;
+                        });
                         await StorageMethods().likePost(
                             postownerid: widget.post.ownerid,
                             context: context,
                             likes: widget.post.likes,
                             postid: widget.post.postid,
                             uid: _userprovider.getuserinfo.userid);
-                        setState(() {
-                          isAnimating = true;
-                        });
                       },
                       child: Stack(
                         alignment: Alignment.center,
@@ -239,7 +232,7 @@ class _PostCardModelState extends State<PostCardModel> {
                               )),
                           AnimatedOpacity(
                             opacity: isAnimating ? 1 : 0,
-                            duration: const Duration(milliseconds: 300),
+                            duration: const Duration(milliseconds: 150),
                             child: LikeAnimation(
                               child: widget.post.likes.contains(
                                       _userprovider.getuserinfo.userid)
@@ -269,7 +262,7 @@ class _PostCardModelState extends State<PostCardModel> {
                       padding: const EdgeInsets.symmetric(horizontal: 5),
                       child: Row(children: [
                         LikeAnimation(
-                          duration: const Duration(milliseconds: 400),
+                          duration: const Duration(milliseconds: 150),
                           isAnimating: widget.post.likes
                               .contains(_userprovider.getuserinfo.userid),
                           smallLike: true,
@@ -360,7 +353,7 @@ class _PostCardModelState extends State<PostCardModel> {
                             style: const TextStyle(color: primaryColor),
                             children: [
                               TextSpan(
-                                  text: widget.post.username,
+                                  text: '${widget.post.username}  ',
                                   style: const TextStyle(
                                       fontWeight: FontWeight.bold)),
                               TextSpan(
@@ -401,21 +394,3 @@ class _PostCardModelState extends State<PostCardModel> {
           );
   }
 }
-// () async {
-//                                 setState(() {
-//                                   _isloading = true;
-//                                 });
-//                                 chatprov.getallmessages(widget.post.ownerid);
-
-//                                 final _snap = await FirebaseFirestore.instance
-//                                     .collection('users')
-//                                     .doc(widget.post.ownerid)
-//                                     .get();
-//                                 setState(() {
-//                                   _isloading = false;
-//                                 });
-
-//                                 final chater = UserModel.fromesnap(_snap);
-
-                               
-                              // }

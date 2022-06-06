@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:instagram_flutter/models/post_model.dart';
-import 'package:instagram_flutter/models/usermodel.dart';
 import 'package:instagram_flutter/widgets/post_card_model.dart';
 import 'package:instagram_flutter/units/colors.dart';
 

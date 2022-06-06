@@ -1,11 +1,8 @@
 import 'dart:async';
-
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:instagram_flutter/providers/chat_provider.dart';
 import 'package:instagram_flutter/providers/user_provider.dart';
 import 'package:instagram_flutter/screens/login_creen.dart';
 import 'package:instagram_flutter/screens/responsev_layout_screen.dart';
@@ -73,11 +70,6 @@ class _MyAppState extends State<MyApp> {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (ctx) => UserProvider()),
-        ChangeNotifierProxyProvider<UserProvider, ChatProvider>(
-            create: (ctx) => ChatProvider(),
-            update: (ctx, userd, chatproc) {
-              return chatproc!..currentuser = userd.getuserinfo;
-            })
       ],
       child: MaterialApp(
         title: 'Instagram Flutter',

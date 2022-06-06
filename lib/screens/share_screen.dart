@@ -47,7 +47,6 @@ class _ShareScreenState extends State<ShareScreen> {
 
   late UserModel _user;
 
-  bool _isloading = false;
   UserModel? targetedUser;
   @override
   Widget build(BuildContext context) {
@@ -83,12 +82,19 @@ class _ShareScreenState extends State<ShareScreen> {
             if (snap.connectionState == ConnectionState.waiting) {
               return Container();
             } else {
+              List<UserModel> userslistwithoutyou = [];
+              final newsnap = snap.data!.docs.where((element) =>
+                  UserModel.fromesnap(element).userid !=
+                  FirebaseAuth.instance.currentUser!.uid);
+
+              for (var element in newsnap) {
+                userslistwithoutyou.add(UserModel.fromesnap(element));
+              }
               return targetedUser == null
                   ? ListView.builder(
-                      itemCount: snap.data!.docs.length,
+                      itemCount: userslistwithoutyou.length,
                       itemBuilder: ((context, index) {
-                        UserModel randomuser =
-                            UserModel.fromesnap(snap.data!.docs[index]);
+                        UserModel randomuser = userslistwithoutyou[index];
                         return Container(
                             padding: const EdgeInsets.only(
                                 left: 20, right: 10, top: 10, bottom: 10),
@@ -194,6 +200,7 @@ class _ShareScreenState extends State<ShareScreen> {
                                           onPressed: () async {
                                             if (_controllermessage
                                                 .text.isNotEmpty) {
+                                              Navigator.pop(context);
                                               await StorageMethods().share(
                                                   reciverid:
                                                       targetedUser!.userid,
@@ -203,7 +210,6 @@ class _ShareScreenState extends State<ShareScreen> {
                                                   sendername: _user.username,
                                                   senderimageurl: _user.photo,
                                                   context: context);
-                                              Navigator.pop(context);
                                             } else {
                                               showsnackbarr(context,
                                                   'pleas write a message first');

@@ -1,4 +1,3 @@
-import 'dart:io';
 import 'dart:typed_data';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -22,8 +21,11 @@ class StorageMethods {
       required Uint8List file,
       required String? postid}) async {
     Reference reff;
+
+    String random = const Uuid().v1();
+
     if (uid == null) {
-      reff = _storage.ref().child(childname);
+      reff = _storage.ref().child(childname).child(random);
     } else {
       reff = _storage.ref().child(childname).child(uid);
     }
@@ -236,12 +238,6 @@ class StorageMethods {
       await _firestore.collection('users').doc(reciverid).update({
         'sharerecived': FieldValue.arrayUnion([shareid])
       });
-      await _firestore
-          .collection('users')
-          .doc(senderid)
-          .collection('share')
-          .doc(shareid)
-          .set(share.tomap());
 
       showsnackbarr(context, 'shared successfully');
     } catch (err) {

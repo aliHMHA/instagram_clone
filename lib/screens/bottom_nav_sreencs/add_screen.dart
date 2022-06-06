@@ -111,8 +111,8 @@ class _AddScreenState extends State<AddScreen> {
                   SizedBox(
                       width: _media.width * .5,
                       child: TextFormField(
-                        style: const TextStyle(fontSize: 22),
-                        maxLines: 3,
+                        style: const TextStyle(fontSize: 19),
+                        maxLines: 2,
                         textInputAction: TextInputAction.done,
                         decoration: const InputDecoration(
                             hintText: 'Write a caption...',
@@ -125,7 +125,7 @@ class _AddScreenState extends State<AddScreen> {
                           return null;
                         },
                       )),
-                  Container(
+                  SizedBox(
                     width: _media.width * .2,
                     height: _media.width * .2,
                     child: Image.memory(_pickedimage!),
@@ -148,24 +148,3 @@ class _AddScreenState extends State<AddScreen> {
           );
   }
 }
-// File _storedimage;
-//   Future<void> _tackApicture() async {
-//     final picker = ImagePicker();
-//     final imagefile = await picker.pickImage(
-//       source: ImageSource.camera,
-//       maxWidth: 600,
-//     );
-//     if (imagefile == null) {
-//       return;
-//     }
-
-//     setState(() {
-//       _storedimage = File(imagefile.path);
-//     });
-//     final appdir = await styspath.getApplicationDocumentsDirectory();
-//     final imagename = path.basename(imagefile.path);
-//     final imagedestination =
-//         await _storedimage.copy('${appdir.path}/$imagename');
-
-//     widget.getImage(imagedestination);
-//   }
