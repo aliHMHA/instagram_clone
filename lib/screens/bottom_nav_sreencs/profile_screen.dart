@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:instagram_flutter/models/post_model.dart';
 import 'package:instagram_flutter/models/usermodel.dart';
+import 'package:instagram_flutter/resources/utlis.dart';
 import 'package:instagram_flutter/widgets/piview_image.dart';
 import 'package:instagram_flutter/providers/user_provider.dart';
 import 'package:instagram_flutter/screens/post_preview_screen.dart';
@@ -73,7 +74,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
         setState(() {});
       });
     } catch (err) {
-      throw (err);
+      showsnackbarr(context, err.toString());
     }
   }
 
@@ -99,12 +100,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
         });
       }
     } catch (e) {
-      print(e);
+      showsnackbarr(context, e.toString());
     }
   }
 
   bool _isgetingdata = true;
-  List<Postmodel> _postModelList = [];
 
   late UserModel _profilowner;
   late bool _isCurrentAfowllower;
@@ -117,10 +117,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
     final bool _iscurentuser =
         _userprov.getuserinfo.userid == widget.profileOnerid;
     final _isWebScreen = _media.width > wepscreensize;
-    _postModelList = _postslist
-        .where((element) =>
-            element.ownerid == FirebaseAuth.instance.currentUser!.uid)
-        .toList();
 
     return _isgetingdata
         ? const Center(
@@ -324,7 +320,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             const QuiltedGridTile(1, 2),
                           ],
                         ),
-                        itemCount: _postModelList.length,
+                        itemCount: _postslist.length,
                         itemBuilder: (context, ind) {
                           return InkWell(
                             onTap: (() {
@@ -332,7 +328,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                   context,
                                   MaterialPageRoute(
                                       builder: (ctx) => PostPreviwScreen(
-                                            postid: _postModelList[ind].postid,
+                                            postid: _postslist[ind].postid,
                                             isfromprofile: true,
                                           )));
                             }),
@@ -341,7 +337,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               placeholder: const AssetImage(
                                   'assets/images/placeHolder2.jpg'),
                               image: NetworkImage(
-                                _postModelList[ind].photoUrl,
+                                _postslist[ind].photoUrl,
                               ),
                             ),
                           );

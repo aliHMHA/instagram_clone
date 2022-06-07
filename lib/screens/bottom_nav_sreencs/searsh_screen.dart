@@ -1,8 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:instagram_flutter/models/usermodel.dart';
-import 'package:instagram_flutter/providers/user_provider.dart';
 import 'package:instagram_flutter/screens/bottom_nav_sreencs/profile_screen.dart';
 import 'package:instagram_flutter/screens/post_preview_screen.dart';
 import 'package:instagram_flutter/units/colors.dart';
@@ -55,18 +55,25 @@ class _SearshScreenState extends State<SearshScreen> {
             if (snap.connectionState == ConnectionState.waiting) {
               return Container();
             } else {
+              List<UserModel> userslistwithoutyou = [];
+              final newsnap = snap.data!.docs.where((element) =>
+                  UserModel.fromesnap(element).userid !=
+                  FirebaseAuth.instance.currentUser!.uid);
+
+              for (var element in newsnap) {
+                userslistwithoutyou.add(UserModel.fromesnap(element));
+              }
               return _isshowing
                   ? ListView.builder(
-                      itemCount: snap.data!.docs.length,
+                      itemCount: userslistwithoutyou.length,
                       itemBuilder: ((context, index) {
-                        UserModel _postowner =
-                            UserModel.fromesnap(snap.data!.docs[index]);
+                        UserModel _instauser = userslistwithoutyou[index];
                         return InkWell(
                           onTap: () {
                             Navigator.of(context).push(
                               MaterialPageRoute(
                                   builder: (ctx) => ProfileScreen(
-                                        profileOnerid: _postowner.userid,
+                                        profileOnerid: _instauser.userid,
                                       )),
                             );
                           },
@@ -77,7 +84,7 @@ class _SearshScreenState extends State<SearshScreen> {
                                 children: [
                                   CircleAvatar(
                                     backgroundImage:
-                                        NetworkImage(_postowner.photo),
+                                        NetworkImage(_instauser.photo),
                                     radius: 30,
                                   ),
                                   Expanded(
@@ -86,7 +93,7 @@ class _SearshScreenState extends State<SearshScreen> {
                                         horizontal: 20),
                                     alignment: Alignment.centerLeft,
                                     child: Text(
-                                      _postowner.username,
+                                      _instauser.username,
                                       style: const TextStyle(fontSize: 25),
                                     ),
                                   ))
