@@ -79,14 +79,6 @@ class _ConnebtsScreenState extends State<CommentsScreen> {
                 color: mobileBackgroundColor,
                 child: Column(
                   children: [
-                    // _commentList.isEmpty
-                    //     ? const Expanded(
-                    //         child: Center(
-                    //             child: Text(
-                    //         'waiting for comments write one',
-                    //         style: TextStyle(fontSize: 20),
-                    //       )))
-                    //     :
                     Expanded(
                       child: ListView.builder(
                           itemCount: _commentList.length,
@@ -135,15 +127,12 @@ class _ConnebtsScreenState extends State<CommentsScreen> {
                     TextButton(
                         onPressed: () async {
                           if (commentcontoller.text.isEmpty ||
-                              commentcontoller.text == null) {
+                              commentcontoller.text.isEmpty) {
                             ScaffoldMessenger.of(context).showSnackBar(
                                 const SnackBar(
                                     content:
                                         Text(' pleas enter acomment first')));
                           } else {
-                            // setState(() {
-                            //   _isloaging = true;
-                            // });
                             final commentid = const Uuid().v1();
                             await StorageMethods().commentpost(
                                 Comment(
@@ -160,13 +149,8 @@ class _ConnebtsScreenState extends State<CommentsScreen> {
                                 context);
                           }
                           commentcontoller.clear();
-                          // setState(() {
-                          //   _isloaging = false;
-                          // });
                         },
-                        child:
-                            // _isloaging? CircularProgressIndicator():
-                            const Text('Comment')),
+                        child: const Text('Comment')),
                   ],
                 ),
               ),
@@ -175,220 +159,3 @@ class _ConnebtsScreenState extends State<CommentsScreen> {
         ));
   }
 }
-
-//  Container(
-//           height: media.size.height * .9,
-//           width: double.infinity,
-//           color: mobileBackgroundColor,
-//           child: Column(
-//             children: [
-//               Expanded(
-//                 child: ListView.builder(
-//                     itemCount: commentprov.getcomments.length,
-//                     itemBuilder: (ctx, ind) =>
-//                         CommentsWindow(comment: commentprov.getcomments[ind])),
-//               ),
-//             ],
-//           ),
-//         )
-
-// ssss
-
-// StreamBuilder(
-//         stream: FirebaseFirestore.instance
-//             .collection('posts')
-//             .doc(widget.postid)
-//             .collection('comments')
-//             .orderBy('timedate')
-//             .snapshots(),
-//         builder:
-//             (cont, AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>> snap) {
-//           if (snap.connectionState == ConnectionState.waiting) {
-//             return Center(child: CircularProgressIndicator());
-//           } else {
-//             print(widget.postid);
-//             return Container(
-//               height: media.height * .8,
-//               width: double.infinity,
-//               color: Colors.white,
-//               child: Column(
-//                 children: [
-//                   Expanded(
-//                     child: ListView.builder(
-//                         itemCount: snap.data.docs.length,
-//                         itemBuilder: (ctx, ind) => CommentsWindow(
-//                             comment: Comment.fromsnap(snap.data.docs[ind]))),
-//                   ),
-//                   Container(
-//                     width: double.infinity,
-//                     margin: EdgeInsets.symmetric(),
-//                     decoration: BoxDecoration(
-//                         color: Colors.grey.shade100,
-//                         border: Border(
-//                             top: BorderSide(
-//                                 width: 1,
-//                                 color: Color.fromARGB(255, 168, 238, 98)))),
-//                     padding: EdgeInsets.all(10),
-//                     child: Row(
-//                       children: [
-//                         Consumer<Authprovider>(
-//                           builder: (ctx, value, ch) => CircleAvatar(
-//                               radius: 20,
-//                               backgroundImage:
-//                                   NetworkImage(value.getdattttta.imageURL)),
-//                         ),
-//                         SizedBox(
-//                           width: 15,
-//                         ),
-//                         Container(
-//                             width: media.width * .55,
-//                             child: TextFormField(
-//                               validator: (value) {
-//                                 if (value.length == 0) {
-//                                   return 'pleas write some thing first ';
-//                                 } else {
-//                                   return null;
-//                                 }
-//                               },
-//                               controller: commentcontoller,
-//                               decoration: InputDecoration(
-//                                   border: InputBorder.none,
-//                                   hintText: 'write a comment...'),
-//                             )),
-//                         TextButton(
-//                             onPressed: () async {
-//                               if (commentcontoller.text.length == 0 ||
-//                                   commentcontoller.text == null) {
-//                                 ScaffoldMessenger.of(context).showSnackBar(
-//                                     SnackBar(
-//                                         content: Text(
-//                                             ' pleas enter acomment first')));
-//                               } else {
-//                                 // setState(() {
-//                                 //   _isloaging = true;
-//                                 // });
-//                                 final commentid = Uuid().v1();
-//                                 await postprovidr.commentpost(Comment(
-//                                     commentid: commentid,
-//                                     commentText: commentcontoller.text,
-//                                     timedate:
-//                                         Timestamp.fromDate(DateTime.now()),
-//                                     postid: widget.postid,
-//                                     useridd: auth.getdattttta.uid,
-//                                     commenterimage: auth.getdattttta.imageURL,
-//                                     commentername: auth.getdattttta.name));
-//                               }
-//                               // setState(() {
-//                               //   _isloaging = false;
-//                               // });
-//                             },
-//                             child:
-//                                 // _isloaging? CircularProgressIndicator():
-//                                 Text('Comment')),
-//                       ],
-//                     ),
-//                   ),
-//                 ],
-//               ),
-//             );
-//           }
-//         });
-
-// HashChangeEvent
-// return StreamBuilder(
-//         stream: FirebaseFirestore.instance
-//             .collection('posts')
-//             .doc(widget.postid)
-//             .collection('comments')
-//             .orderBy('timedate')
-//             .snapshots(),
-//         builder:
-//             (cont, AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>> snap) {
-//           if (snap.connectionState == ConnectionState.waiting) {
-//             return const Center(
-//                 child: CircularProgressIndicator(
-//               color: primaryColor,
-//             ));
-//           } else {
-//             return Container(
-//               height: media.height * .8,
-//               width: double.infinity,
-//               child: Column(
-//                 children: [
-//                   Expanded(
-//                     child: Container(
-//                       padding: const EdgeInsets.all(8),
-//                       child: ListView.builder(
-//                           itemCount: snap.data!.docs.length,
-//                           itemBuilder: (ctx, ind) => CommentsWindow(
-//                               comment: Comment.fromsnap(snap.data!.docs[ind]))),
-//                     ),
-//                   ),
-//                   Container(
-//                     width: double.infinity,
-//                     margin: const EdgeInsets.symmetric(),
-//                     decoration: BoxDecoration(
-//                         color: Colors.grey.shade100,
-//                         border: const Border(
-//                             top: BorderSide(
-//                                 width: 1,
-//                                 color: Color.fromARGB(255, 168, 238, 98)))),
-//                     padding: const EdgeInsets.all(10),
-//                     child: Row(
-//                       children: [
-//                         Consumer<UserProvider>(
-//                           builder: (ctx, value, ch) => CircleAvatar(
-//                               radius: 20,
-//                               backgroundImage:
-//                                   NetworkImage(value.getuserinfo.photo)),
-//                         ),
-//                         const SizedBox(
-//                           width: 15,
-//                         ),
-//                         Container(
-//                             width: media.width * .55,
-//                             child: TextFormField(
-//                               controller: commentcontoller,
-//                               decoration: const InputDecoration(
-//                                   border: InputBorder.none,
-//                                   hintText: 'write a comment...'),
-//                             )),
-//                         TextButton(
-//                             onPressed: () async {
-//                               if (commentcontoller.text.isEmpty ||
-//                                   commentcontoller.text == null) {
-//                                 ScaffoldMessenger.of(context).showSnackBar(
-//                                     const SnackBar(
-//                                         content: Text(
-//                                             ' pleas enter acomment first')));
-//                               } else {
-//                                 // setState(() {
-//                                 //   _isloaging = true;
-//                                 // });
-//                                 final commentid = const Uuid().v1();
-//                                 await StorageMethods().commentpost(Comment(
-//                                     commentid: commentid,
-//                                     commentText: commentcontoller.text,
-//                                     timedate:
-//                                         Timestamp.fromDate(DateTime.now()),
-//                                     postid: widget.postid,
-//                                     useridd: userprov.getuserinfo.userid,
-//                                     commenterimage: userprov.getuserinfo.photo,
-//                                     commentername:
-//                                         userprov.getuserinfo.username));
-//                               }
-//                               // setState(() {
-//                               //   _isloaging = false;
-//                               // });
-//                             },
-//                             child:
-//                                 // _isloaging? CircularProgressIndicator():
-//                                 const Text('Comment')),
-//                       ],
-//                     ),
-//                   ),
-//                 ],
-//               ),
-//             );
-//           }
-//         });

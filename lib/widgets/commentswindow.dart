@@ -49,10 +49,12 @@ class CommentsWindow extends StatelessWidget {
                   TextSpan(
                       text: '${comment.commentername} ',
                       style: const TextStyle(
-                          fontSize: 20, fontWeight: FontWeight.bold)),
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white)),
                   TextSpan(
                       text: comment.commentText,
-                      style: const TextStyle(fontSize: 18))
+                      style: const TextStyle(fontSize: 18, color: Colors.white))
                 ]),
               ),
               Container(

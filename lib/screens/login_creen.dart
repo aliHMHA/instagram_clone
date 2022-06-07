@@ -95,7 +95,7 @@ class _LoginScreenState extends State<LoginScreen> {
               ispassword: true,
               texttype: TextInputType.emailAddress),
           const SizedBox(height: 24),
-          Container(
+          SizedBox(
             child: ElevatedButton(
               style: ElevatedButton.styleFrom(
                   shape: RoundedRectangleBorder(
@@ -127,18 +127,18 @@ class _LoginScreenState extends State<LoginScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Container(
-                padding: Platform.isIOS
-                    ? const EdgeInsets.only(bottom: 18, top: 8)
-                    : const EdgeInsets.only(bottom: 8, top: 8),
+                padding:
+                    // Platform.isIOS
+                    //     ? const EdgeInsets.only(bottom: 18, top: 8):
+
+                    const EdgeInsets.only(bottom: 20, top: 8),
                 child: const Text('Don\'t have an account'),
               ),
               const SizedBox(width: 3),
               GestureDetector(
                 onTap: changelog,
                 child: Container(
-                  padding: Platform.isIOS
-                      ? const EdgeInsets.only(bottom: 18, top: 8)
-                      : const EdgeInsets.only(bottom: 8, top: 8),
+                  padding: const EdgeInsets.only(bottom: 20, top: 8),
                   child: const Text(
                     'Sign up',
                     style: TextStyle(

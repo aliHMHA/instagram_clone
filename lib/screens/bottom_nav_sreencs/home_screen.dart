@@ -53,7 +53,8 @@ class HomeScreen extends StatelessWidget {
                         },
                         icon: const Icon(
                           Icons.bookmark,
-                          size: 20,
+                          size: 30,
+                          color: Colors.white,
                         ),
                       ),
                       Stack(
@@ -70,7 +71,7 @@ class HomeScreen extends StatelessWidget {
                                         builder: (ctx) =>
                                             const SharePreview()));
                               },
-                              iconSize: 20),
+                              iconSize: 30),
                           CircleAvatar(
                             backgroundColor: Colors.red,
                             radius: 9,

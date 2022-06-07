@@ -1,20 +1,12 @@
-import 'dart:io';
 import 'dart:typed_data';
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:instagram_flutter/resources/auth_methods.dart';
 import 'package:instagram_flutter/resources/storage_metods.dart';
 import 'package:instagram_flutter/resources/utlis.dart';
-import 'package:instagram_flutter/screens/login_creen.dart';
-import 'package:instagram_flutter/screens/mobile_screen_layout.dart';
-import 'package:instagram_flutter/screens/responsev_layout_screen.dart';
-import 'package:instagram_flutter/screens/web_screen_layout.dart';
 import 'package:instagram_flutter/units/dimentions.dart';
 import '../units/colors.dart';
-
 import '../widgets/text_input_field.dart';
 
 class SignupScreen extends StatefulWidget {
@@ -172,9 +164,6 @@ class _SignupScreenState extends State<SignupScreen> {
                       borderRadius: BorderRadius.circular(10))),
               onPressed: adduser,
               child: Container(
-                // decoration: BoxDecoration(
-                //     color: Colors.blue,
-                //     borderRadius: const BorderRadius.all(Radius.circular(10))),
                 alignment: Alignment.center,
                 padding: const EdgeInsets.symmetric(vertical: 12),
                 width: double.infinity,
@@ -193,18 +182,14 @@ class _SignupScreenState extends State<SignupScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Container(
-                padding: Platform.isIOS
-                    ? const EdgeInsets.only(bottom: 18, top: 8)
-                    : const EdgeInsets.only(bottom: 8, top: 8),
+                padding: const EdgeInsets.only(bottom: 18, top: 8),
                 child: const Text('Don\'t have an account'),
               ),
               const SizedBox(width: 3),
               GestureDetector(
                 onTap: changelod,
                 child: Container(
-                  padding: Platform.isIOS
-                      ? const EdgeInsets.only(bottom: 18, top: 8)
-                      : const EdgeInsets.only(bottom: 8, top: 8),
+                  padding: const EdgeInsets.only(bottom: 18, top: 8),
                   child: const Text(
                     'Login',
                     style: TextStyle(
