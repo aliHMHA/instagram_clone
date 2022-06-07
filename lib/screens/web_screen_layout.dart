@@ -94,37 +94,3 @@ class _WebScreenLayoutState extends State<WebScreenLayout> {
     );
   }
 }
-//  bottomNavigationBar: CupertinoTabBar(
-//             // currentIndex: _index,
-//             onTap: navigationtaped,
-//             // activeColor: primaryColor,
-//             backgroundColor: mobileBackgroundColor,
-//             items: [
-//               BottomNavigationBarItem(
-//                 icon: Icon(
-//                   Icons.home,
-//                   color: _index == 0 ? primaryColor : secondaryColor,
-//                 ),
-//                 label: '',
-//               ),
-//               BottomNavigationBarItem(
-//                 icon: Icon(Icons.favorite,
-//                     color: _index == 1 ? primaryColor : secondaryColor),
-//                 label: '',
-//               ),
-//               BottomNavigationBarItem(
-//                 icon: Icon(Icons.add_circle,
-//                     color: _index == 2 ? primaryColor : secondaryColor),
-//                 label: '',
-//               ),
-//               BottomNavigationBarItem(
-//                 icon: Icon(Icons.search,
-//                     color: _index == 3 ? primaryColor : secondaryColor),
-//                 label: '',
-//               ),
-//               BottomNavigationBarItem(
-//                 icon: Icon(Icons.person,
-//                     color: _index == 4 ? primaryColor : secondaryColor),
-//                 label: '',
-//               ),
-//             ])
