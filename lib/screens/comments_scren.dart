@@ -39,7 +39,7 @@ class _ConnebtsScreenState extends State<CommentsScreen> {
         .collection('posts')
         .doc(widget.postid)
         .collection('comments')
-        .orderBy('timedate', descending: true)
+        .orderBy('timedate', descending: false)
         .snapshots()
         .listen((event) {
       _commentList = [];

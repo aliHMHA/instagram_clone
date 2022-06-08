@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:instagram_flutter/models/comment_model.dart';
 import 'package:instagram_flutter/widgets/like_animation.dart';
@@ -48,10 +49,16 @@ class CommentsWindow extends StatelessWidget {
                 text: TextSpan(children: [
                   TextSpan(
                       text: '${comment.commentername} ',
-                      style: const TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white)),
+                      style: comment.useridd ==
+                              FirebaseAuth.instance.currentUser!.uid
+                          ? TextStyle(
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.blue[400])
+                          : const TextStyle(
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white)),
                   TextSpan(
                       text: comment.commentText,
                       style: const TextStyle(fontSize: 18, color: Colors.white))
@@ -96,21 +103,6 @@ class CommentsWindow extends StatelessWidget {
           ],
         ),
       ]),
-      // Container(
-      //   padding: const EdgeInsets.only(left: 30, top: 10),
-      //   alignment: Alignment.centerLeft,
-      //   child: Container(
-      //     decoration: BoxDecoration(
-      //         color: Colors.grey[600],
-      //         // border: Border.all(),
-      //         borderRadius: BorderRadius.all(Radius.circular(10))),
-      //     padding: EdgeInsets.all(8),
-      //     child: Text(
-      //       comment.commentText,
-      //       style: TextStyle(fontSize: 22),
-      //     ),
-      //   ),
-      // ),
     );
   }
 }
