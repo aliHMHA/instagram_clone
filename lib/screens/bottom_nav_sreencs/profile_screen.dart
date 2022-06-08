@@ -125,9 +125,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
             ),
           )
         : Scaffold(
-            appBar: _isWebScreen
-                ? null
-                : AppBar(title: Text(_profilowner.username)),
+            appBar: _isWebScreen ? null : AppBar(),
             body: Container(
               padding: const EdgeInsets.all(10),
               child: Column(children: [
